@@ -21,7 +21,7 @@ Window::Window()
   format.setDepthBufferSize(24);
   //format.setMajorVersion(3);
   //format.setMinorVersion(0);
-  //format.setVersion(3,0);
+  format.setVersion(3,1);
   //format.setProfile(QSurfaceFormat::NoProfile);
   oglw->setFormat(format);
 
