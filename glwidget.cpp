@@ -89,8 +89,8 @@ void GLWidget::initializeGL()
   QOpenGLShader *vshader = new QOpenGLShader(QOpenGLShader::Vertex, this);
   QOpenGLShader *fshader = new QOpenGLShader(QOpenGLShader::Fragment, this);
   program = new QOpenGLShaderProgram;
-  const char *src =
-      //"#version 150\n"
+  const char *vsrc =
+      "#version 120\n"
       "attribute highp vec4 vertex;\n"
       "attribute mediump vec4 texCoord;\n"
       "varying mediump vec4 texc;\n"
@@ -100,18 +100,18 @@ void GLWidget::initializeGL()
       "    gl_Position = matrix * vertex;\n"
       "    texc = texCoord;\n"
       "}\n";
-  vshader->compileSourceCode(src);
+  vshader->compileSourceCode(vsrc);
   program->addShader(vshader);
 
-  src =
-      //"#version 150\n"
+  const char *fsrc =
+      "#version 120\n"
       "uniform sampler2D texture;\n"
       "varying mediump vec4 texc;\n"
       "void main(void)\n"
       "{\n"
       "    gl_FragColor = texture2D(texture, texc.st);\n"
       "}\n";
-  fshader->compileSourceCode(src);
+  fshader->compileSourceCode(fsrc);
   program->addShader(fshader);
 
   program->bindAttributeLocation("vertex", PROGRAM_VERTEX_ATTRIBUTE);
@@ -133,7 +133,8 @@ void GLWidget::initializeGL()
   // Установка нескольких VBO и IBO (используем QOpenGLBuffer для хранения данных,
   // указание формата, указание применения и т.д.). Это будет "запомнено"
   // с текущим связанным VAO
-  src=
+  const char *src=
+          "#version 120\n"
   "attribute highp vec4 vertexAttr; \n"
   "uniform mediump mat4 viewport;   \n"
   "attribute lowp vec4 colorAttr; \n"
@@ -145,6 +146,7 @@ void GLWidget::initializeGL()
   vshader->compileSourceCode(src);
   m_shaderProgram.addShader(vshader);
   src=
+          "#version 120\n"
   "varying lowp vec4 color;\n"
   "void main () {\n"
   "gl_FragColor = color;\n"

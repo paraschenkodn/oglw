@@ -21,8 +21,8 @@ Window::Window()
   format.setDepthBufferSize(24);
   //format.setMajorVersion(3);
   //format.setMinorVersion(0);
-  format.setVersion(3,1);
-  //format.setProfile(QSurfaceFormat::NoProfile);
+  //format.setVersion(3,1);
+  format.setProfile(QSurfaceFormat::CompatibilityProfile);
   oglw->setFormat(format);
 
   view->setViewport(myGLWidget);
